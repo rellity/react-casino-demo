@@ -25,10 +25,10 @@ const GameProviders = () => {
     ];
 
     return (
-        <>
+        <div onClick={() => setOpenProvider(true)}>
             <div className="flex flex-row items-center justify-between m-3">
 
-                <p className="text-sm cursor-pointer " onClick={() => setOpenProvider(true)}> Proveedores de juego</p>
+                <p className="text-sm cursor-pointer " > Proveedores de juego</p>
 
 
                 <div className="flex flex-row justify-between gap-x-3">
@@ -46,7 +46,7 @@ const GameProviders = () => {
                     />
                 ))}
             </div>
-        </>
+        </div>
     );
 };
 
