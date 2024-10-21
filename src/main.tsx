@@ -6,6 +6,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import HomePage from './app/home/HomePage';
+import { ActiveTabProvider } from './modules/store/filter-store';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ActiveTabProvider>
+
+      <RouterProvider router={router} />
+
+    </ActiveTabProvider>
   </StrictMode>,
 )
