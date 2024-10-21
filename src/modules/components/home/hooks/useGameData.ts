@@ -6,20 +6,21 @@ import { useActiveTab } from "../../../store/filter-store";
 export default function useGameData() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [games, setGames] = useState<Game[]>([]);
-    const { searchTerm, activeTab: categoryTerm } = useActiveTab();
+    const { searchTerm, activeTab: categoryTerm, activeBottomNav, favGame, gameProvider } = useActiveTab();
+
 
     // block for 3 secs
     useEffect(() => {
         const fetchGames = async () => {
+            setGames([])
             setIsLoading(true);
-            await new Promise((resolve) => setTimeout(resolve, 3000));
+            await new Promise((resolve) => setTimeout(resolve, 1500));
             setIsLoading(false);
-            setGames(GAMES);
+            setGames(activeBottomNav === "FAVORITES" ? favGame : GAMES);
         };
 
         fetchGames();
-    }, [searchTerm, categoryTerm]);
-
+    }, [searchTerm, categoryTerm, activeBottomNav, favGame, gameProvider]);
 
 
     const filteredGames = useMemo(() => {
@@ -30,9 +31,13 @@ export default function useGameData() {
 
             const matchesSearchTerm = game.name.toLowerCase().includes(searchTerm.toLowerCase());
 
-            return matchesCategory && matchesSearchTerm;
+            const matchesProvider = gameProvider
+                ? game.provider.toLowerCase() === gameProvider.toLowerCase()
+                : true;
+
+            return matchesCategory && matchesSearchTerm && matchesProvider;
         });
-    }, [games, searchTerm, categoryTerm]);
+    }, [games, searchTerm, categoryTerm, gameProvider]);
 
     return { filteredGames, isLoading };
 }

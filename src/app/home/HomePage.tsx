@@ -6,8 +6,14 @@ import { SearchSection } from "../../modules/components/home/section/search-sect
 import { useActiveTab } from "../../modules/store/filter-store";
 import { BannerCarousel } from "../../modules/components/home/section/banner-carousel";
 import GameSection from "../../modules/components/home/section/games-section";
+import BottomNav from "../../modules/components/navs/bottomnav";
+import GameProviders from "../../modules/components/home/section/game-providers";
+import { ProviderModal } from "../../modules/components/home/modal/provider-modal";
+
+
 
 export default function HomePage() {
+
     const { search } = useActiveTab();
 
     return (
@@ -16,7 +22,6 @@ export default function HomePage() {
 
             <div className="flex flex-col items-center justify-center">
                 <div className="flex flex-col items-center justify-center p-2 pb-1">
-                    {/* <img src={banner} alt="banner" className="w-[360px] h-[181px] object-cover" /> */}
                     <BannerCarousel />
                 </div>
                 <div className="flex flex-row items-center justify-center">
@@ -30,6 +35,12 @@ export default function HomePage() {
                 </div>
             </div>
             <GameSection />
+
+            <GameProviders />
+
+            <ProviderModal />
+
+            <BottomNav />
         </div>
     );
 }

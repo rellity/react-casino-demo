@@ -13,7 +13,9 @@ export type NavItemProps = {
 }
 
 export type Game = {
+    id: string
     name: string;
     icon: string;
     categories: string[];
+    provider: string;
 };
